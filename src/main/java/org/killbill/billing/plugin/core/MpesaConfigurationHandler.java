@@ -11,7 +11,7 @@ import org.killbill.billing.plugin.client.MpesaClientWrapper;
 import com.google.common.annotations.VisibleForTesting;
 
 public class MpesaConfigurationHandler extends PluginTenantConfigurableConfigurationHandler<MpesaClientWrapper>{
-    private static final String PROPERTY_PREFIX = "org.killbill.billing.plugin.kbmp.";
+    private static final String PROPERTY_PREFIX = "org.killbill.billing.plugin.kbsafcom.";
 
     public MpesaConfigurationHandler(final String pluginName,
                                        final OSGIKillbillAPI osgiKillbillAPI,
