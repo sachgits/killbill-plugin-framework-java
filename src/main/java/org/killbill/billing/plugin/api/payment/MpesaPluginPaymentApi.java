@@ -23,7 +23,7 @@ import org.killbill.billing.payment.plugin.api.PaymentMethodInfoPlugin;
 import org.killbill.billing.payment.plugin.api.PaymentPluginApiException;
 import org.killbill.billing.payment.plugin.api.PaymentTransactionInfoPlugin;
 import org.killbill.billing.plugin.api.PluginProperties;
-import org.killbill.billing.plugin.api.payment.PluginPaymentPluginApi;
+import org.killbill.billing.plugin.api.payment.*;
 import org.killbill.billing.plugin.client.MpesaClientWrapper;
 import org.killbill.billing.plugin.core.MpesaConfigurationHandler;
 
