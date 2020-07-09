@@ -41,10 +41,10 @@ public abstract  class MpesaCoreBase {
     public MpesaCoreBase( int bizShortCode) {
         BusinessShortCode = bizShortCode;
 
-        /*
+    
         String datetimeStamp = DateTimeFormat.forPattern("yyyyMMddhhmmss").print(DateTime.now());
         timestamp = Long.valueOf(datetimeStamp);
-        */
+        
 
         Passkey = APIResourceConstants.SecurityConstants.SECURITY_CREDENTIAL; //TODO: below
 
@@ -108,10 +108,10 @@ public abstract  class MpesaCoreBase {
      * TimeStamp of the transaction in the format 
      * {yyyyMMddhhmmss}
      * error might arise here due to date format about so test well
-     
+     */
     @JsonProperty("TimeStamp")
     public Long timestamp;
-    */
+    
 
     @JsonIgnore
     public int BusinessShortCode;
