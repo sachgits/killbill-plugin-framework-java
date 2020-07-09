@@ -139,10 +139,12 @@
             <groupId>org.jooby</groupId>
             <artifactId>jooby-servlet</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.jooq</groupId>
-            <artifactId>jooq</artifactId>
-        </dependency>
+<!-- https://mvnrepository.com/artifact/org.jooq/jooq -->
+<dependency>
+    <groupId>org.jooq</groupId>
+    <artifactId>jooq</artifactId>
+    <version>3.13.1</version>
+</dependency>
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
