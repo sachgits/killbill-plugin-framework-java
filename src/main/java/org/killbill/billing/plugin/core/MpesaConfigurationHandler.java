@@ -13,10 +13,16 @@ import org.slf4j.LoggerFactory;
 import com.google.common.annotations.VisibleForTesting;
 
 public class MpesaConfigurationHandler extends PluginTenantConfigurableConfigurationHandler<MpesaClientWrapper>{
+   
     private static final String PROPERTY_PREFIX = "org.killbill.billing.plugin.kbsafcom.";
+    private static final String ENTRY_DELIMITER = "|";
+    private static final String KEY_VALUE_DELIMITER = "#";
+    private static final String DEFAULT_CONNECTION_TIMEOUT = "30000";
+    private static final String DEFAULT_READ_TIMEOUT = "60000";
 
     private static final Logger logger = LoggerFactory.getLogger(MpesaConfigurationHandler.class);
     
+
     public MpesaConfigurationHandler(final String pluginName,
                                        final OSGIKillbillAPI osgiKillbillAPI,
                                        final OSGIKillbillLogService osgiKillbillLogService) {
