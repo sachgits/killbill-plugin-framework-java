@@ -15,6 +15,8 @@ import org.killbill.billing.plugin.dao.MpesaDao;
 import org.killbill.clock.Clock;
 import org.killbill.clock.DefaultClock;
 import org.osgi.framework.BundleContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MpesaActivator extends KillbillActivatorBase{
 
@@ -22,6 +24,7 @@ public class MpesaActivator extends KillbillActivatorBase{
 
     private MpesaConfigurationHandler mpesaConfigurationHandler;
 
+    private static final Logger logger = LoggerFactory.getLogger(MpesaActivator.class);
     @Override
     public void start(final BundleContext context) throws Exception {
         super.start(context);

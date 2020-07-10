@@ -37,6 +37,8 @@ import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
 import org.killbill.clock.Clock;
 import org.osgi.service.log.LogService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.common.base.MoreObjects;
 
@@ -67,6 +69,8 @@ public class MpesaPluginPaymentApi extends PluginPaymentPluginApi<MpesaResponses
     public static final String PROPERTY_BALANCE = "balance";
     public static final String PROPERTY_FIRST_NAME = "first_name";
     public static final String PROPERTY_LAST_NAME = "last_name";
+
+    private static final Logger logger = LoggerFactory.getLogger(MpesaPluginPaymentApi.class);
 
     @Override
     public PaymentTransactionInfoPlugin authorizePayment(UUID arg0, UUID arg1, UUID arg2, UUID arg3, BigDecimal arg4,
