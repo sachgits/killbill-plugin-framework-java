@@ -21,7 +21,7 @@ import com.google.common.collect.ImmutableSet;
 
 public class MpesaConfigProperties {
     
-        private static final String PROPERTY_PREFIX = "org.killbill.billing.plugin.kbsafcom.";
+        public static final String PROPERTY_PREFIX = "org.killbill.billing.plugin.kbsafcom.";
         private static final String ENTRY_DELIMITER = "|";
         private static final String KEY_VALUE_DELIMITER = "#";
         private static final String DEFAULT_CONNECTION_TIMEOUT = "30000";
