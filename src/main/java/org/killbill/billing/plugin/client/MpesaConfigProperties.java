@@ -27,7 +27,7 @@ public class MpesaConfigProperties {
         private static final String DEFAULT_CONNECTION_TIMEOUT = "30000";
         private static final String DEFAULT_READ_TIMEOUT = "60000";
 
-        private final String merchantAccounts;
+        private final Integer merchantAccounts;
         private final String apiKey;
         private final String apiSecret;
         private final String defaultPaymentUrl;
@@ -41,6 +41,8 @@ public class MpesaConfigProperties {
         private final String passkey;
         private final String initiatorName;
         private final String securityCredential;
+        private final String confirmationURL;
+        private final String validationURL;
 
         public static final String REVERSAL_TRANSACTIONS = "/mpesa/reversal/v1/request";
         public static final String TRANSACTIONS_STATUS = "/mpesa/transactionstatus/v1/query";
@@ -51,13 +53,13 @@ public class MpesaConfigProperties {
         public static final String ACCOUNT_BALANCE = "/mpesa/accountbalance/v1/query";
         public static final String SECURE_TOKEN_URL = "/oauth/v1/generate?grant_type=client_credentials";
         public static final String REGISTER_URL = "/mpesa/c2b/v1/registerurl";
-        public static final int    SANDBOX_SHORTCODE = 600425;
-        public static final int    LIVE_SHORTCODE = 234480; 
+        public static final int    SANDBOX_SHORTCODE = 234480; //DELETE NOT APPLICABLE
+        public static final int    SHORTCODE = 600425;         //DELETE NOT APPLICABLE
 
         public static final String MPESA_CERTIFICATE="mpesa.cer";
         public static final String TOKEN="Bearer ";
         public static final String TIMESTAMP="timestamp";
-        public static final String AUTHORIZE="Authorization";
+        public static final String AUTHORIZE="Authorization ";
         
         public MpesaConfigProperties(final Properties properties){
             this.apiKey = properties.getProperty(PROPERTY_PREFIX+ "apiKey");
@@ -69,11 +71,14 @@ public class MpesaConfigProperties {
         this.defaultPaymentUrl = properties.getProperty(PROPERTY_PREFIX + "paymentUrl");
         this.paymentConnectionTimeout = properties.getProperty(PROPERTY_PREFIX + "paymentConnectionTimeout", DEFAULT_CONNECTION_TIMEOUT);
         this.paymentReadTimeout = properties.getProperty(PROPERTY_PREFIX + "paymentReadTimeout", DEFAULT_READ_TIMEOUT);
-        this.merchantAccounts = properties.getProperty(PROPERTY_PREFIX + "shortcode");
+        //TODO: we should use parseInt instead of valueOf improvment
+        this.merchantAccounts = Integer.valueOf(properties.getProperty(PROPERTY_PREFIX + "shortcode")); 
         this.passkey = properties.getProperty(PROPERTY_PREFIX + "passkey");
         this.mpesaCertificate = properties.getProperty(PROPERTY_PREFIX + "mpesaCertificate");
         this.initiatorName = properties.getProperty(PROPERTY_PREFIX + "initiatorName");
         this.securityCredential = properties.getProperty(PROPERTY_PREFIX + "securityCredential");
+        this.confirmationURL = properties.getProperty(PROPERTY_PREFIX + "confimationUrl");
+        this.validationURL = properties.getProperty(PROPERTY_PREFIX + "validationUrl");
         }
 
 
@@ -105,7 +110,7 @@ public class MpesaConfigProperties {
         public String getPaymentReadTimeout() {
             return paymentReadTimeout;
         }
-        public String getMerchantAccounts() {
+        public Integer getMerchantAccounts() {
             return merchantAccounts;
         }
         public String getPasskey() {
@@ -119,6 +124,12 @@ public class MpesaConfigProperties {
         }
         public String getSecurityCredential() {
             return securityCredential;
+        }
+        public String getConfirmationURL() {
+            return confirmationURL;
+        }
+        public String getValidationURL() {
+            return validationURL;
         }
 
 }

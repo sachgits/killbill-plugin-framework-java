@@ -16,6 +16,8 @@ import org.killbill.billing.plugin.core.resources.MpesaConfirmationServlet;
 import org.killbill.billing.plugin.core.resources.jooby.PluginApp;
 import org.killbill.billing.plugin.core.resources.jooby.PluginAppBuilder;
 import org.killbill.billing.plugin.dao.MpesaDao;
+import org.killbill.billing.plugin.models.RegisterURLRequest;
+import org.killbill.billing.plugin.models.RegisterURLResponse;
 import org.killbill.clock.Clock;
 import org.killbill.clock.DefaultClock;
 import org.osgi.framework.BundleContext;
@@ -49,6 +51,8 @@ public class MpesaActivator extends KillbillActivatorBase{
         final HttpServlet mpesaServlet= PluginApp.createServlet(pluginApp);
         registerServlet(context, mpesaServlet);
 
+
+
         mpesaConfigurationHandler = new MpesaConfigurationHandler(PLUGIN_NAME, killbillAPI, logService);
         mPropertiesConfigHandler = new MpesaConfigPropertiesConfigHandler(PLUGIN_NAME, killbillAPI, logService);
 
@@ -56,6 +60,12 @@ public class MpesaActivator extends KillbillActivatorBase{
         mpesaConfigurationHandler.setDefaultConfigurable(globalMpesaClient);
         final MpesaConfigProperties configProps = mPropertiesConfigHandler.createConfigurable(configProperties.getProperties());
         mPropertiesConfigHandler.setDefaultConfigurable(configProps);
+
+        //Register MpesaRegisterUrl
+        RegisterURLRequest rUrlRequest = new RegisterURLRequest(configProps.getMerchantAccounts(), configProps.getConfirmationURL(),
+         configProps.getValidationURL());
+        RegisterURLResponse rUrlResponse = globalMpesaClient.registerMPesaPaybillRequest(rUrlRequest);
+        logger.info("response from safcom RegisterURL {}", rUrlResponse);
 
         // Register the payment plugin
         final PaymentPluginApi paymentPluginApi = new MpesaPluginPaymentApi(mpesaConfigurationHandler, killbillAPI, configProperties, logService, clock, dao);
