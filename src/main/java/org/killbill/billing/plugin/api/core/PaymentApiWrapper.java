@@ -62,7 +62,7 @@ public class PaymentApiWrapper {
             // (we have two APIs after all).
             return null;
         }
-
+        
         final Payment payment = osgiKillbillAPI.getPaymentApi().getPayment(kbPaymentId, false, true, ImmutableList.<PluginProperty>of(), context);
         if (payment.getPaymentAttempts() != null && !payment.getPaymentAttempts().isEmpty()) {
             return ImmutableList.<String>copyOf(Splitter.on(",").split(payment.getPaymentAttempts().get(0).getPluginName()));

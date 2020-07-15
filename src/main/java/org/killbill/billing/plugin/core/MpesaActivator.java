@@ -65,7 +65,7 @@ public class MpesaActivator extends KillbillActivatorBase{
         RegisterURLRequest rUrlRequest = new RegisterURLRequest(configProps.getMerchantAccounts(), configProps.getConfirmationURL(),
          configProps.getValidationURL());
         RegisterURLResponse rUrlResponse = globalMpesaClient.registerMPesaPaybillRequest(rUrlRequest);
-        logger.info("response from safcom RegisterURL {}", rUrlResponse);
+        logger.info("response from safcom RegisterURL '{}'", rUrlResponse);
 
         // Register the payment plugin
         final PaymentPluginApi paymentPluginApi = new MpesaPluginPaymentApi(mpesaConfigurationHandler, killbillAPI, configProperties, logService, clock, dao);
