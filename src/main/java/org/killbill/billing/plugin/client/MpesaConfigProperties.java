@@ -5,10 +5,10 @@ import java.util.Properties;
 public class MpesaConfigProperties {
     
         public static final String PROPERTY_PREFIX = "org.killbill.billing.plugin.kbsafcom.";
-        private static final String ENTRY_DELIMITER = "|";
-        private static final String KEY_VALUE_DELIMITER = "#";
-        private static final String DEFAULT_CONNECTION_TIMEOUT = "30000";
-        private static final String DEFAULT_READ_TIMEOUT = "60000";
+        public static final String ENTRY_DELIMITER = "|";
+        public static final String KEY_VALUE_DELIMITER = "#";
+        public static final String DEFAULT_CONNECTION_TIMEOUT = "30000";
+        public static final String DEFAULT_READ_TIMEOUT = "60000";
 
         private final Integer merchantAccounts;
         private final String apiKey;

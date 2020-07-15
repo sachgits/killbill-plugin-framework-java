@@ -113,7 +113,7 @@ public class MpesaClientWrapper extends HttpClient {
                         SimulateTransactionResponse.class);
         }  catch (InterruptedException | ExecutionException | TimeoutException | IOException | URISyntaxException e) {
             
-            logger.warn("unable to register server url with safcom details '{}'", sTransactionRequest, e);
+            logger.warn("unable to Trigger simulate transacion on safcom details '{}'", sTransactionRequest, e);
             return toSimulateTransactionResponse(e, null);
         } catch (InvalidRequest invalidReq){
             String body;
@@ -122,7 +122,7 @@ public class MpesaClientWrapper extends HttpClient {
             } catch (final IOException ignored) {
                 body = null;
             }
-            logger.warn("Unable to register server url with safcom ='{}', body='{}'", sTransactionRequest, body, invalidReq);
+            logger.warn("Unable to Trigger simulate transacion on safcom ='{}', body='{}'", sTransactionRequest, body, invalidReq);
             return toSimulateTransactionResponse(invalidReq, body);
         }
     }
@@ -148,7 +148,7 @@ public class MpesaClientWrapper extends HttpClient {
             } catch (final IOException ignored) {
                 body = null;
             }
-            logger.warn("Unable to register server url with safcom ='{}', body='{}'", tStatusRequest, body, invalidReq);
+            logger.warn("Unable to Check transaction status with safcom ='{}', body='{}'", tStatusRequest, body, invalidReq);
             return toTransactionStatusResponse(invalidReq, body);
         }
     }
@@ -217,7 +217,7 @@ public class MpesaClientWrapper extends HttpClient {
 
     public void setHeaders(final String body, final AsyncHttpClient.BoundRequestBuilder builder){
         builder.addHeader(MpesaConfigProperties.AUTHORIZE, 
-                   MpesaConfigProperties.TOKEN + token);
+                   MpesaConfigProperties.TOKEN + getToken());
         builder.addHeader("User-Agent", "KillBill 0.22");
         builder.addHeader("accept", APPLICATION_JSON);
         builder.addHeader("Content-Type", APPLICATION_JSON);   
