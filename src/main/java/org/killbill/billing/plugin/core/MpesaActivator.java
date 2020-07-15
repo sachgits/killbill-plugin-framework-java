@@ -52,7 +52,6 @@ public class MpesaActivator extends KillbillActivatorBase{
         registerServlet(context, mpesaServlet);
 
 
-
         mpesaConfigurationHandler = new MpesaConfigurationHandler(PLUGIN_NAME, killbillAPI, logService);
         mPropertiesConfigHandler = new MpesaConfigPropertiesConfigHandler(PLUGIN_NAME, killbillAPI, logService);
 

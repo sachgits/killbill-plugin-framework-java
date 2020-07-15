@@ -49,22 +49,20 @@ public class MpesaClientWrapper extends HttpClient {
 
     private static final Logger logger = LoggerFactory.getLogger(MpesaClientWrapper.class);
 
-    private final String apiKey;
-    private final String apiSecret;
     private final String token;
+    private final MpesaConfigProperties config;
 
-    public MpesaClientWrapper(String url, String apiKey, String apiSecret, String proxyHost, Integer proxyPort,
-            Boolean strictSSL) throws GeneralSecurityException {
-        super(url, null, null, proxyHost, proxyPort, strictSSL);
-        // TODO Auto-generated constructor stub
-        this.apiKey = apiKey;
-        this.apiSecret = apiSecret;
+    public MpesaClientWrapper(MpesaConfigProperties mpesaProps) throws GeneralSecurityException {
+        super(mpesaProps.getDefaultPaymentUrl(), null, null, mpesaProps.getProxyServer(), 
+                        mpesaProps.getProxyPort(), mpesaProps.getTrustAllCertificates());
         this.token = getToken();
+        this.config = mpesaProps;
     }
 
+  
     public String getToken() {
-        String url = String.format("%s%s", this.url, APIResourceConstants.SECURE_TOKEN_URL);
-        String appKeySecret = this.apiKey + ":" + this.apiSecret;
+        String url = String.format("%s%s", this.url, MpesaConfigProperties.SECURE_TOKEN_URL);
+        String appKeySecret = config.getApiKey() + ":" + config.getApiSecret();
         byte[] keySecretBytes = appKeySecret.getBytes(StandardCharsets.ISO_8859_1);
         String auth = Base64.encodeBase64String(keySecretBytes);
 
@@ -88,7 +86,7 @@ public class MpesaClientWrapper extends HttpClient {
     }
 
     public String getToken(String credentialsUri) {
-        String appKeySecret = apiKey + ":" + apiSecret;
+        String appKeySecret = config.getApiKey()+ ":" + config.getApiSecret();
         byte[] keySecretBytes = appKeySecret.getBytes(StandardCharsets.ISO_8859_1);
         String auth = Base64.encodeBase64String(keySecretBytes);
         final Map<String, String> headers = new HashMap<String, String>();
@@ -109,7 +107,7 @@ public class MpesaClientWrapper extends HttpClient {
     public SimulateTransactionResponse triggerSimulateTransaction(final TransactionStatusRequest sTransactionRequest){
         try{
             return doCall(POST,
-                        APIResourceConstants.SIMULATE_C2B_TRANSACTION,
+                        MpesaConfigProperties.SIMULATE_C2B_TRANSACTION,
                         mapper.writeValueAsString(sTransactionRequest),
                         ImmutableMap.<String,String>of(),
                         SimulateTransactionResponse.class);
@@ -137,7 +135,7 @@ public class MpesaClientWrapper extends HttpClient {
 
     public TransactionStatusResponse checktransactionStatus(final TransactionStatusRequest tStatusRequest){
         try {
-            return doCall(POST, APIResourceConstants.TRANSACTIONS_STATUS, mapper.writeValueAsString(tStatusRequest),
+            return doCall(POST, MpesaConfigProperties.TRANSACTIONS_STATUS, mapper.writeValueAsString(tStatusRequest),
                         ImmutableMap.<String,String>of(), TransactionStatusResponse.class);
             
         } catch (InterruptedException | ExecutionException | TimeoutException | IOException | URISyntaxException e) {
@@ -163,7 +161,7 @@ public class MpesaClientWrapper extends HttpClient {
 
     public RegisterURLResponse registerMPesaPaybillRequest(final RegisterURLRequest rUrlRequest) {
         try {
-            return doCall(POST, APIResourceConstants.REGISTER_URL, mapper.writeValueAsString(rUrlRequest), ImmutableMap.<String,String>of(),
+            return doCall(POST, MpesaConfigProperties.REGISTER_URL, mapper.writeValueAsString(rUrlRequest), ImmutableMap.<String,String>of(),
                    RegisterURLResponse.class);
         } catch (InterruptedException | ExecutionException | TimeoutException | IOException | URISyntaxException e) {
             
@@ -218,8 +216,8 @@ public class MpesaClientWrapper extends HttpClient {
     }
 
     public void setHeaders(final String body, final AsyncHttpClient.BoundRequestBuilder builder){
-        builder.addHeader(APIResourceConstants.SecurityConstants.AUTHORIZE, 
-                   APIResourceConstants.SecurityConstants.TOKEN + token);
+        builder.addHeader(MpesaConfigProperties.AUTHORIZE, 
+                   MpesaConfigProperties.TOKEN + token);
         builder.addHeader("User-Agent", "KillBill 0.22");
         builder.addHeader("accept", APPLICATION_JSON);
         builder.addHeader("Content-Type", APPLICATION_JSON);   

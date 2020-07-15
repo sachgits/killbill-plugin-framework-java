@@ -32,9 +32,9 @@ public class MpesaConfigProperties {
         private final String apiSecret;
         private final String defaultPaymentUrl;
         private final String proxyServer;
-        private final String proxyPort;
+        private final Integer proxyPort;
         private final String proxyType;
-        private final String trustAllCertificates;
+        private final Boolean trustAllCertificates;
         private final String paymentConnectionTimeout;
         private final String paymentReadTimeout;
         private final String mpesaCertificate;
@@ -59,15 +59,15 @@ public class MpesaConfigProperties {
         public static final String MPESA_CERTIFICATE="mpesa.cer";
         public static final String TOKEN="Bearer ";
         public static final String TIMESTAMP="timestamp";
-        public static final String AUTHORIZE="Authorization ";
+        public static final String AUTHORIZE="Authorization";
         
         public MpesaConfigProperties(final Properties properties){
             this.apiKey = properties.getProperty(PROPERTY_PREFIX+ "apiKey");
             this.apiSecret = properties.getProperty(PROPERTY_PREFIX + "apiSecret");
         this.proxyServer = properties.getProperty(PROPERTY_PREFIX + "proxyServer");
-        this.proxyPort = properties.getProperty(PROPERTY_PREFIX + "proxyPort");
+        this.proxyPort = Integer.valueOf(properties.getProperty(PROPERTY_PREFIX + "proxyPort"));
         this.proxyType = properties.getProperty(PROPERTY_PREFIX + "proxyType");
-        this.trustAllCertificates = properties.getProperty(PROPERTY_PREFIX + "trustAllCertificates", "false");
+        this.trustAllCertificates = Boolean.valueOf(properties.getProperty(PROPERTY_PREFIX + "trustAllCertificates", "false"));
         this.defaultPaymentUrl = properties.getProperty(PROPERTY_PREFIX + "paymentUrl");
         this.paymentConnectionTimeout = properties.getProperty(PROPERTY_PREFIX + "paymentConnectionTimeout", DEFAULT_CONNECTION_TIMEOUT);
         this.paymentReadTimeout = properties.getProperty(PROPERTY_PREFIX + "paymentReadTimeout", DEFAULT_READ_TIMEOUT);
@@ -92,13 +92,13 @@ public class MpesaConfigProperties {
         public String getProxyServer() {
             return proxyServer;
         }
-        public String getProxyPort() {
+        public Integer getProxyPort() {
             return proxyPort;
         }
         public String getProxyType() {
             return proxyType;
         }
-        public String getTrustAllCertificates() {
+        public Boolean getTrustAllCertificates() {
             return trustAllCertificates;
         }
         public String getDefaultPaymentUrl() {

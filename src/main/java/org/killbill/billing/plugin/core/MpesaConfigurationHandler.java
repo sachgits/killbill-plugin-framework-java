@@ -28,16 +28,10 @@ public class MpesaConfigurationHandler extends PluginTenantConfigurableConfigura
     @Override
     @VisibleForTesting
     public MpesaClientWrapper createConfigurable(final Properties properties) {
-        final String proxyPort = properties.getProperty(MpesaConfigProperties.PROPERTY_PREFIX + "proxyPort");
         MpesaConfigProperties props = new MpesaConfigProperties(properties);
         try {
             //TODO: refactor MpesaClientWrapper to use props from MpesaConfigProperties
-            return new MpesaClientWrapper(properties.getProperty(MpesaConfigProperties.PROPERTY_PREFIX + "paymentUrl"),
-                                            properties.getProperty(MpesaConfigProperties.PROPERTY_PREFIX + "apiKey"),
-                                            properties.getProperty(MpesaConfigProperties.PROPERTY_PREFIX + "apiSecret"),
-                                            properties.getProperty(MpesaConfigProperties.PROPERTY_PREFIX + "proxyHost"),
-                                            proxyPort == null ? null : Integer.valueOf(proxyPort),
-                                            Boolean.valueOf(properties.getProperty(MpesaConfigProperties.PROPERTY_PREFIX + "trustAllCertificates", "true")));
+            return new MpesaClientWrapper(props);
         } catch (final GeneralSecurityException e) {
             throw new RuntimeException(e);
         }
