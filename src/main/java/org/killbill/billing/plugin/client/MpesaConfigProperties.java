@@ -1,23 +1,6 @@
 package org.killbill.billing.plugin.client;
 
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 import java.util.Properties;
-import java.util.Set;
-
-import javax.annotation.Nullable;
-
-import org.joda.time.Period;
-
-import com.google.common.base.MoreObjects;
-import com.google.common.base.Strings;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
 
 public class MpesaConfigProperties {
     
@@ -64,21 +47,21 @@ public class MpesaConfigProperties {
         public MpesaConfigProperties(final Properties properties){
             this.apiKey = properties.getProperty(PROPERTY_PREFIX+ "apiKey");
             this.apiSecret = properties.getProperty(PROPERTY_PREFIX + "apiSecret");
-        this.proxyServer = properties.getProperty(PROPERTY_PREFIX + "proxyServer");
-        this.proxyPort = Integer.valueOf(properties.getProperty(PROPERTY_PREFIX + "proxyPort"));
-        this.proxyType = properties.getProperty(PROPERTY_PREFIX + "proxyType");
-        this.trustAllCertificates = Boolean.valueOf(properties.getProperty(PROPERTY_PREFIX + "trustAllCertificates", "false"));
-        this.defaultPaymentUrl = properties.getProperty(PROPERTY_PREFIX + "paymentUrl");
-        this.paymentConnectionTimeout = properties.getProperty(PROPERTY_PREFIX + "paymentConnectionTimeout", DEFAULT_CONNECTION_TIMEOUT);
-        this.paymentReadTimeout = properties.getProperty(PROPERTY_PREFIX + "paymentReadTimeout", DEFAULT_READ_TIMEOUT);
-        //TODO: we should use parseInt instead of valueOf improvment
-        this.merchantAccounts = Integer.valueOf(properties.getProperty(PROPERTY_PREFIX + "shortcode")); 
-        this.passkey = properties.getProperty(PROPERTY_PREFIX + "passkey");
-        this.mpesaCertificate = properties.getProperty(PROPERTY_PREFIX + "mpesaCertificate");
-        this.initiatorName = properties.getProperty(PROPERTY_PREFIX + "initiatorName");
-        this.securityCredential = properties.getProperty(PROPERTY_PREFIX + "securityCredential");
-        this.confirmationURL = properties.getProperty(PROPERTY_PREFIX + "confimationUrl");
-        this.validationURL = properties.getProperty(PROPERTY_PREFIX + "validationUrl");
+            this.proxyPort = Integer.valueOf(properties.getProperty(PROPERTY_PREFIX + "proxyPort"));
+            this.proxyType = properties.getProperty(PROPERTY_PREFIX + "proxyType");
+            this.trustAllCertificates = Boolean.valueOf(properties.getProperty(PROPERTY_PREFIX + "trustAllCertificates", "false"));
+            this.defaultPaymentUrl = properties.getProperty(PROPERTY_PREFIX + "paymentUrl");
+            this.paymentConnectionTimeout = properties.getProperty(PROPERTY_PREFIX + "connectionTimeout", DEFAULT_CONNECTION_TIMEOUT);
+            this.paymentReadTimeout = properties.getProperty(PROPERTY_PREFIX + "readTimeout", DEFAULT_READ_TIMEOUT);
+            //TODO: we should use parseInt instead of valueOf improvment
+            this.merchantAccounts = Integer.valueOf(properties.getProperty(PROPERTY_PREFIX + "shortcode")); 
+            this.passkey = properties.getProperty(PROPERTY_PREFIX + "passkey");
+            this.mpesaCertificate = properties.getProperty(PROPERTY_PREFIX + "mpesaCertificate");
+            this.initiatorName = properties.getProperty(PROPERTY_PREFIX + "initiatorName");
+            this.securityCredential = properties.getProperty(PROPERTY_PREFIX + "securityCredential");
+            this.confirmationURL = properties.getProperty(PROPERTY_PREFIX + "confimationUrl");
+            this.validationURL = properties.getProperty(PROPERTY_PREFIX + "validationUrl");
+            this.proxyServer = properties.getProperty(PROPERTY_PREFIX + "proxyServer");
         }
 
 
