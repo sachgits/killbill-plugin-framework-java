@@ -26,6 +26,7 @@ public class MpesaConfigProperties {
         private final String securityCredential;
         private final String confirmationURL;
         private final String validationURL;
+        private final String killbillUrl;
 
         public static final String REVERSAL_TRANSACTIONS = "/mpesa/reversal/v1/request";
         public static final String TRANSACTIONS_STATUS = "/mpesa/transactionstatus/v1/query";
@@ -62,6 +63,7 @@ public class MpesaConfigProperties {
             this.confirmationURL = properties.getProperty(PROPERTY_PREFIX + "confimationUrl");
             this.validationURL = properties.getProperty(PROPERTY_PREFIX + "validationUrl");
             this.proxyServer = properties.getProperty(PROPERTY_PREFIX + "proxyServer");
+            this.killbillUrl = properties.getProperty(PROPERTY_PREFIX + "killbillUrl");
         }
 
 
@@ -113,6 +115,9 @@ public class MpesaConfigProperties {
         }
         public String getValidationURL() {
             return validationURL;
+        }
+        public String getKillbillUrl() {
+            return killbillUrl;
         }
 
 }
